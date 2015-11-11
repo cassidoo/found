@@ -1,0 +1,7 @@
+---
+applications:
+- buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  host: found
+  name: found
+  memory: 128M
+  stack: cflinuxfs2
