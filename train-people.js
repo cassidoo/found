@@ -29,6 +29,14 @@ $(document).ready(function() {
   }
 });
 
+function tutorial() {
+  swal({
+    title: 'How this works',
+    text: 'We know how hard it can be to lose a loved one in a crisis. We are here to help. <br> First, <span style="color:#F8BB86">Type in the name</span> of your loved one. Then, upload a photo of them, and hit, <span style="color:#F8BB86">Add Loved One</span>. You can repeat this as many times as you would like. <br> If you have found someone, add their name to the form, and hit, <span style="color:#F8BB86">Found Loved One</span>. If they are in the system, we will send an email indicating to their loved ones that they have been found!',
+    html: true
+  });
+}
+
 function nameSubmit() {
   nombre = $("#name").val();
 }
