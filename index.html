@@ -11,9 +11,8 @@
     <link rel="stylesheet" type="text/css" href="sweetalert.css">
     <link rel="stylesheet" type="text/css" href="main.css">
 
-    <script type="text/javascript" src="train.js"></script>
     <script type="text/javascript" src="clarifai-basic.js"></script>
-    <script type="text/javascript" src="train-signatures.js"></script>
+    <script type="text/javascript" src="train-people.js"></script>
   </head>
   <body>
     <div class="title">Found</div>
@@ -25,7 +24,11 @@
       <button class="pure-button pure-button-primary sig" onclick="trainPerson()">Add Loved One</button>
       <button class="pure-button pure-button-primary sig" onclick="testPerson()">Find Loved One</button>
     </div>
-    <canvas id="canvas" width="800px" height="500px"></canvas>
-    <input type="file" id="file-input">
+
+    <div class="image-form">
+      <input type="file" id="file-input">
+      <br>
+      <canvas id="canvas" width="600px" height="400px"></canvas>
+    </div>
   </body>
 </html>
