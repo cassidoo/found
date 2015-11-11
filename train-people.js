@@ -1,4 +1,6 @@
 var clarifai;
+var contact = 'contact';
+var email = 'example@example.com';
 var nombre = 'example';
 
 $(document).ready(function() {
@@ -41,6 +43,11 @@ function nameSubmit() {
   nombre = $("#name").val();
 }
 
+function emailSubmit() {
+  email = $("#email").val();
+  contact = $("#contactname").val();
+}
+
 function positive(imgurl) {
   clarifai.positive(imgurl, nombre, callback).then(
     promiseResolved,
@@ -72,7 +79,7 @@ function posTrain(imgurl) {
 function predict(imgurl) {
   clarifai.predict(imgurl, nombre, callback)
   .then(function(obj) {
-      if (obj.score < 0.6) {
+      if (obj.score < 0.45) {
         swal({
           title: 'We are sorry.',
           text: 'That person has not been found yet.',
@@ -81,26 +88,26 @@ function predict(imgurl) {
       } else {
         swal({
           title: 'This person, '+ nombre +', has been found!',
-          text: 'Thank you so much for your efforts.',
-          imageUrl: obj.url
+          text: 'Thank you so much for your efforts.'
         });
+        var message = 'Hi '+contact+'!  We have exciting news for you.  It seems that we located your loved one, '+nombre+'!';
         $.ajax({
         type: "POST",
         url: 'https://mandrillapp.com/api/1.0/messages/send.json',
         data: {
-          'key': 'xqVOxJi9EcJE0yTYRrtPw',
+          'key': 'fcwDfYIhFEBJo6ukhImdzw',
           'message': {
             'from_email': 'ijoosong@gmail.com',
             'to': [
                 {
-                  'email': 'cassidoo@gmail.com',
-                  'name': 'Cassidy Williams',
+                  'email': email,
+                  'name': contact,
                   'type': 'to'
                 },
               ],
             'autotext': 'true',
-            'subject': 'Your Loved One Found!',
-            'html': 'Hi Cassidy Williams!  We have exciting news for you.  It seems that we located your loved one, '+nombre+'!'
+            'subject': 'Your loved one has been found!',
+            'html': message
           }
         }
        }).done(function(response) {
