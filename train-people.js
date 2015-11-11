@@ -1,12 +1,32 @@
-/* Yolo */
 var clarifai;
 var nombre = 'example';
 
 $(document).ready(function() {
   clarifai = new Clarifai({
-    'clientId': '',
-    'clientSecret': ''
+    'clientId': 'WB7TiuaBn8mW4fMtYVZKsu6Cj7kBBPm9KhLqfHiM',
+    'clientSecret': '1GgaELc_KgYJ9wS4ut4V8BH7ZJErmyEwz7k88RRb'
   });
+  $('#file-input').change(function(e) {
+    var file = e.target.files[0],
+        imageType = /image.*/;
+
+    if (!file.type.match(imageType))
+        return;
+
+    var reader = new FileReader();
+    reader.onload = fileOnload;
+    reader.readAsDataURL(file);
+  });
+
+  function fileOnload(e) {
+    var $img = $('<img>', { src: e.target.result });
+    var canvas = $('#canvas')[0];
+    var context = canvas.getContext('2d');
+
+    $img.load(function() {
+        context.drawImage(this, 0, 0);
+    });
+  }
 });
 
 function nameSubmit() {
@@ -46,14 +66,14 @@ function predict(imgurl) {
   .then(function(obj) {
       if (obj.score < 0.6) {
         swal({
-          title: 'Nope!',
-          text: 'Something is not right with that signature.',
+          title: 'We are sorry.',
+          text: 'That person has not been found yet.',
           imageUrl: obj.url
         });
       } else {
         swal({
-          title: 'Sweet!',
-          text: 'You are all set!',
+          title: 'This person, '+ nombre +', has been found!',
+          text: 'Thank you so much for your efforts.',
           imageUrl: obj.url
         });
       }
@@ -74,7 +94,7 @@ function callback(obj){
   console.log('callback', obj);
 }
 
-function trainSignature() {
+function trainPerson() {
   var img;
   try {
     img = document.getElementById('canvas').toDataURL('image/jpeg', 0.9).split(',')[1];
@@ -88,7 +108,7 @@ function trainSignature() {
     url: 'https://api.imgur.com/3/image',
     type: 'post',
     headers: {
-        Authorization: 'Client-ID cbe0b464bdb9b8e'
+        Authorization: 'Client-ID b5bc03834968324'
     },
     data: {
         image: img
@@ -103,7 +123,7 @@ function trainSignature() {
   });
 }
 
-function testSignature() {
+function testPerson() {
   var img;
   try {
     img = document.getElementById('canvas').toDataURL('image/jpeg', 0.9).split(',')[1];
@@ -117,7 +137,7 @@ function testSignature() {
     url: 'https://api.imgur.com/3/image',
     type: 'post',
     headers: {
-        Authorization: 'Client-ID cbe0b464bdb9b8e'
+        Authorization: 'Client-ID b5bc03834968324'
     },
     data: {
         image: img
