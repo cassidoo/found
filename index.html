@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Found</title>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <script src="sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script type="text/javascript" src="train.js"></script>
+    <script type="text/javascript" src="clarifai-basic.js"></script>
+    <script type="text/javascript" src="train-signatures.js"></script>
+  </head>
+  <body>
+    <div class="title">Found</div>
+    <div class="desc">Search and find your loved ones in crisis through machine learning</div>
+    <div class="name-form pure-form">
+      <input type="text" id="name" placeholder="Name">
+      <button class="pure-button pure-button-primary" onclick="nameSubmit()">Submit Name</button>
+      <br>
+      <button class="pure-button pure-button-primary sig" onclick="trainPerson()">Add Loved One</button>
+      <button class="pure-button pure-button-primary sig" onclick="testPerson()">Find Loved One</button>
+    </div>
+  </body>
+</html>
