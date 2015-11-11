@@ -5,8 +5,8 @@ var nombre = 'example';
 
 $(document).ready(function() {
   clarifai = new Clarifai({
-    'clientId': 'WB7TiuaBn8mW4fMtYVZKsu6Cj7kBBPm9KhLqfHiM',
-    'clientSecret': '1GgaELc_KgYJ9wS4ut4V8BH7ZJErmyEwz7k88RRb'
+    'clientId': CLARIFAI_KEY,
+    'clientSecret': CLARIFAI_SECRET
   });
   $('#file-input').change(function(e) {
     var file = e.target.files[0],
@@ -95,9 +95,9 @@ function predict(imgurl) {
         type: "POST",
         url: 'https://mandrillapp.com/api/1.0/messages/send.json',
         data: {
-          'key': 'fcwDfYIhFEBJo6ukhImdzw',
+          'key': EMAIL_SECRET,
           'message': {
-            'from_email': 'ijoosong@gmail.com',
+            'from_email': APP_EMAIL,
             'to': [
                 {
                   'email': email,
@@ -111,7 +111,7 @@ function predict(imgurl) {
           }
         }
        }).done(function(response) {
-         console.log(response); // if you're into that sorta thing
+         console.log(response);
         });
       }
     },
@@ -145,7 +145,7 @@ function trainPerson() {
     url: 'https://api.imgur.com/3/image',
     type: 'post',
     headers: {
-        Authorization: 'Client-ID b5bc03834968324'
+        Authorization: 'Client-ID ' + IMGUR_KEY
     },
     data: {
         image: img
@@ -174,7 +174,7 @@ function testPerson() {
     url: 'https://api.imgur.com/3/image',
     type: 'post',
     headers: {
-        Authorization: 'Client-ID b5bc03834968324'
+        Authorization: 'Client-ID ' + IMGUR_KEY
     },
     data: {
         image: img
